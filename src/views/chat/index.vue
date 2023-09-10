@@ -3,7 +3,7 @@ import type { Ref } from 'vue'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import { NAutoComplete, NButton, NInput, useDialog, useMessage } from 'naive-ui'
+import { NAutoComplete, NButton, NInput, useDialog, useMessage, NSelect } from 'naive-ui'
 import html2canvas from 'html2canvas'
 import { Message } from './components'
 import { useScroll } from './hooks/useScroll'
@@ -461,6 +461,14 @@ onUnmounted(() => {
   if (loading.value)
     controller.abort()
 })
+
+const modelOptions = [{
+	label: "GPT-3.5",
+	value: "GPT-3.5"
+}, {
+	label: "bing",
+	value: "bing"
+}]
 </script>
 
 <template>
@@ -528,6 +536,7 @@ onUnmounted(() => {
               <SvgIcon icon="ri:chat-history-line" />
             </span>
           </HoverButton>
+					<n-select v-model:value="chatStore.modelCode" :options="modelOptions" style="width: 200px"></n-select>
           <NAutoComplete v-model:value="prompt" :options="searchOptions" :render-label="renderOption">
             <template #default="{ handleInput, handleBlur, handleFocus }">
               <NInput

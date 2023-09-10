@@ -9,6 +9,7 @@ export function defaultState(): Chat.ChatState {
     usingContext: true,
     history: [{ uuid, title: 'New Chat', isEdit: false }],
     chat: [{ uuid, data: [] }],
+		modelCode: 'GPT-3.5'
   }
 }
 
